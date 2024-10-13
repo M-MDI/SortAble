@@ -3,19 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <script src="index.js" defer></script>
-    <title>Document</title>
+    <title>Superhero Table</title>
   </head>
   <body>
+    <h1>Heroes Database</h1>
+    <div class="controls">
+      <div id="searchContainer"></div>
+      <select id="select">
+        <option value="all">all results</option>
+        <option value="10">10</option>
+        <option value="20" selected>20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
     <div id="pagination"></div>
-    <select id="select">
-      <option value="all">all results</option>
-      <option value="10">10</option>
-      <option value="20" selected>20</option>
-      <option value="50">50</option>
-      <option value="100">100</option>
-    </select>
-    <script>
-    </script>
   </body>
 </html>
