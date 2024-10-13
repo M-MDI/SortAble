@@ -1,96 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Superhero Database</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            color: #333;
-        }
-        #search-container, #page-size-container {
-            margin-bottom: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-            cursor: pointer;
-        }
-        th:hover {
-            background-color: #ddd;
-        }
-        img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-        }
-        #pagination {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        #pagination button {
-            margin: 0 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <h1>Superhero Database</h1>
-    <div id="search-container">
-        <input type="text" id="search" placeholder="Search by name...">
-    </div>
-    <div id="page-size-container">
-        <label for="page-size">Results per page:</label>
-        <select id="page-size">
-            <option value="10">10</option>
-            <option value="20" selected>20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="all">All</option>
-        </select>
-    </div>
-    <table id="heroes-table">
-        <thead>
-            <tr>
-                <th data-sort="icon">Icon</th>
-                <th data-sort="name">Name</th>
-                <th data-sort="fullName">Full Name</th>
-                <th data-sort="intelligence">Intelligence</th>
-                <th data-sort="strength">Strength</th>
-                <th data-sort="speed">Speed</th>
-                <th data-sort="durability">Durability</th>
-                <th data-sort="power">Power</th>
-                <th data-sort="combat">Combat</th>
-                <th data-sort="race">Race</th>
-                <th data-sort="gender">Gender</th>
-                <th data-sort="height">Height</th>
-                <th data-sort="weight">Weight</th>
-                <th data-sort="placeOfBirth">Place of Birth</th>
-                <th data-sort="alignment">Alignment</th>
-            </tr>
-        </thead>
-        <tbody id="heroes-body"></tbody>
-    </table>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="index.js" defer></script>
+    <title>Document</title>
+  </head>
+  <body>
     <div id="pagination"></div>
-
-    <script src="fetsh.js"></script>
-</body>
+    <select id="select">
+      <option value="all">all results</option>
+      <option value="10">10</option>
+      <option value="20" selected>20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+    <script>
+    </script>
+  </body>
 </html>
