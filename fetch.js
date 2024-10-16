@@ -98,50 +98,50 @@ function search(e) {
   );
   sortData(filtered, currentSortColumn, currentSortOrder);
 }
-function isMissingValue(value) {
-  return (
-    value === null ||
-    value === undefined ||
-    value === "" ||
-    value === "-" ||
-    value === "N/A"
-  );
+function isMissing(value) {
+  return value === null || value === undefined || value === "" || value === "-";
 }
 function sortData(data, column, order) {
   const sortedData = [...data].sort((a, b) => {
-    let aValue = getNestedValue(a, column);
-    let bValue = getNestedValue(b, column);
+    let a_value = getNested(a, column);
+    let b_value = getNested(b, column);
     if (column === "powerstats") {
-      aValue = calculateTotalPower(aValue);
-      bValue = calculateTotalPower(bValue);
+      a_value = totalPower(a_value);
+      b_value = totalPower(b_value);
     }
-    const aIsMissing = isMissingValue(aValue);
-    const bIsMissing = isMissingValue(bValue);
-    if (aIsMissing && bIsMissing) return 0;
-    if (aIsMissing) return 1;
-    if (bIsMissing) return -1;
+    const a_missing = isMissing(a_value);
+    const b_missing = isMissing(b_value);
+    if (a_missing && b_missing) return 0;
+    if (a_missing) return 1;
+    if (b_missing) return -1;
     if (column === "appearance.height" || column === "appearance.weight") {
-      aValue = parseFloat(aValue[1]); // Use metric value
-      bValue = parseFloat(bValue[1]); // Use metric value
+      a_value = parseFloat(a_value[1]); // Use metric value
+      b_value = parseFloat(b_value[1]); // Use metric value
     }
-    if (typeof aValue === "number" && typeof bValue === "number") {
-      return order === "asc" ? aValue - bValue : bValue - aValue;
+    if (typeof a_value === "number" && typeof b_value === "number") {
+      return order === "asc" ? a_value - b_value : b_value - a_value;
     } else {
-      const comparison = String(aValue).localeCompare(String(bValue));
+      const comparison = String(a_value).localeCompare(String(b_value));
       return order === "asc" ? comparison : -comparison;
     }
   });
   loadData(sortedData.slice(0, itemsPerPage));
   pagination(sortedData);
 }
-function calculateTotalPower(powerstats) {
-  return Object.values(powerstats).reduce(
-    (sum, stat) => sum + (parseInt(stat) || 0),
-    0
-  );
+function totalPower(powerstats) {
+  const values = Object.values(powerstats);
+  let result = 0;
+  for (const value of values) {
+    result += parseInt(value);
+  }
+  return result;
 }
-function getNestedValue(obj, path) {
-  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+function getNested(obj, path) {
+  let value = obj;
+  path.split(".").forEach((k) => {
+    value = value[k];
+  });
+  return value;
 }
 function pagination(data) {
   const pagination = document.querySelector("div#pagination");
@@ -168,8 +168,8 @@ thead.addEventListener("click", (e) => {
   if (!th || !th.classList.contains("sortable")) return;
   const column = columns.find((col) => col.name === th.textContent);
   if (column) {
+    currentSortOrder = currentSortOrder === "asc" ? "desc" : "asc";
     if (currentSortColumn === column.key) {
-      currentSortOrder = currentSortOrder === "asc" ? "desc" : "asc";
     } else {
       currentSortColumn = column.key;
       currentSortOrder = "asc";
